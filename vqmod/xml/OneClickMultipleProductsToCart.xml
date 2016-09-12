@@ -1,0 +1,91 @@
+<!--
+/*
+ * @support
+ * http://www.opensourcetechnologies.com/contactus.html
+ * sales@opensourcetechnologies.com
+ * */
+-->
+<modification>  
+   <id>One Click Multiple Products To Cart</id>
+   <version>1.0.0</version>
+   <vqmver>2.4.1</vqmver>
+   <author>OST</author>
+   <file name="catalog/view/theme/*/template/common/header.tpl">
+	   <operation>
+		   <search position="before"><![CDATA[<?php foreach ($styles as $style) { ?>]]></search>
+		   <add>
+			   <![CDATA[
+				<script src="catalog/view/javascript/OneClickMultipleProductsToCart.js" type="text/javascript"></script>
+			   ]]>
+		   </add>
+	   </operation>
+   </file>
+   
+   <file name="catalog/view/theme/*/template/product/category.tpl">
+	   <operation>
+		   <search position="after"><![CDATA[<p><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></p>]]></search>
+		   <add>
+			   <![CDATA[
+				  <div class="row"><strong>
+					  <span class="col-md-9"><input type=checkbox name=select_all[] class=selectall> Select All &nbsp;&nbsp; Qty: <span class="btn plusqty" style='padding:7px 10px;'><i class="fa fa-plus"></i></span> <input type=number value=0 min=0 class="qty" style='width:50px;height:33px;text-align:center;border: 1px solid #ccc;border-radius: 4px;'> <span class="btn minusqty" style='padding:7px 10px;'><i class="fa fa-minus"></i></span>
+					  <button type="button" class="btn bulk-buy-button" style='padding:7px 10px;'><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+					  </span>
+					  </strong>
+				  </div>
+			   ]]>
+		   </add>
+	   </operation>
+   </file>
+   <file name="catalog/view/theme/*/template/product/category.tpl">
+	   <operation>
+		   <search position="after"><![CDATA[<div class="col-sm-6 text-right"><?php echo $results; ?></div>]]></search>
+		   <add>
+			   <![CDATA[
+					</div>
+					<div class="row"><strong>
+					  <span class="col-md-9"><input type=checkbox name=select_all[] class=selectall> Select All &nbsp;&nbsp; Qty: <span class="btn plusqty" style='padding:7px 10px;'><i class="fa fa-plus"></i></span> <input type=number value=0 min=0 class="qty" style='width:50px;height:33px;text-align:center;border: 1px solid #ccc;border-radius: 4px;'> <span class="btn  minusqty" style='padding:7px 10px;'><i class="fa fa-minus"></i></span>
+						   <button type="button" class="btn bulk-buy-button" style='padding:7px 10px;'><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+					  </span>
+					  </strong>
+				  </div>
+			   ]]>
+		   </add>
+	   </operation>
+   </file>
+   <file name="catalog/view/theme/*/template/product/category.tpl">
+	   <operation>
+		   <search position="replace"><![CDATA[<button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>]]></search>
+		   <add>
+			   <![CDATA[
+					<button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>',$('#quan_<?php echo $product['product_id']; ?>').val());"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
+			   ]]>
+		   </add>
+	   </operation>
+   </file>
+   <file name="catalog/controller/product/category.php">
+	   <operation>
+		   <search position="before"><![CDATA['rating'      => $result['rating'],]]></search>
+		   <add>
+			   <![CDATA[
+					'option'         =>$this->model_catalog_product->getProductOptions($result['product_id']), 
+			   ]]>
+		   </add>
+	   </operation>
+   </file>
+    <file name="catalog/view/theme/*/template/product/category.tpl">
+	   <operation>
+		   <search position="before"><![CDATA[<div class="button-group">]]></search>
+		   <add>
+			   <![CDATA[
+					<?php if(!$product['option']){?>
+					<strong>
+					<p style='padding-left:15px;padding-bottom:5px;'><input type=checkbox name=slects[] class="checks"> &nbspQty: <input type=number min=0 name=quantities[]  value=0 class="quantity" id="quan_<?php echo $product['product_id']; ?>" style='width:50px;height:33px;text-align:center;border: 1px solid #ccc;border-radius: 4px;'></p>
+					</strong>
+					<?php 
+					}
+					?>
+			   ]]>
+		   </add>
+	   </operation>
+   </file>    
+</modification>
