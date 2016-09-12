@@ -1,10 +1,3 @@
-/*
- * @support
- * http://www.opensourcetechnologies.com/contactus.html
- * sales@opensourcetechnologies.com
- * 
-*/
-
 Bulk Buy Product for Open­Cart is a well thought out and excel­lently made mod­ule that allows to add lots of products of different types on category page.
 
 Features of Bulk Buy Product extension
